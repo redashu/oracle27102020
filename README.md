@@ -212,3 +212,57 @@ HOME_URL="https://alpinelinux.org/"
 BUG_REPORT_URL="https://bugs.alpinelinux.org/"
 
 ```
+
+
+## check host kernel inside container 
+
+```
+[centos@ip-172-31-71-212 ~]$ docker  run  -it  --name ashux1  python  bash 
+root@df4546a7fafd:/# 
+root@df4546a7fafd:/# python
+Python 3.9.0 (default, Oct 13 2020, 20:14:06) 
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> exit;
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> exit();
+root@df4546a7fafd:/# whoami
+root
+root@df4546a7fafd:/# uname
+Linux
+root@df4546a7fafd:/# uname  -r
+3.10.0-862.14.4.el7.x86_64
+root@df4546a7fafd:/# cat  /etc/os-release 
+PRETTY_NAME="Debian GNU/Linux 10 (buster)"
+NAME="Debian GNU/Linux"
+VERSION_ID="10"
+VERSION="10 (buster)"
+VERSION_CODENAME=buster
+ID=debian
+HOME_URL="https://www.debian.org/"
+SUPPORT_URL="https://www.debian.org/support"
+BUG_REPORT_URL="https://bugs.debian.org/"
+root@df4546a7fafd:/# exit
+[centos@ip-172-31-71-212 ~]$ cat  /etc/os-release 
+NAME="CentOS Linux"
+VERSION="7 (Core)"
+ID="centos"
+ID_LIKE="rhel fedora"
+VERSION_ID="7"
+PRETTY_NAME="CentOS Linux 7 (Core)"
+ANSI_COLOR="0;31"
+CPE_NAME="cpe:/o:centos:centos:7"
+HOME_URL="https://www.centos.org/"
+BUG_REPORT_URL="https://bugs.centos.org/"
+
+CENTOS_MANTISBT_PROJECT="CentOS-7"
+CENTOS_MANTISBT_PROJECT_VERSION="7"
+REDHAT_SUPPORT_PRODUCT="centos"
+REDHAT_SUPPORT_PRODUCT_VERSION="7"
+
+[centos@ip-172-31-71-212 ~]$ uname -r
+3.10.0-862.14.4.el7.x86_64
+
+
+```
+
