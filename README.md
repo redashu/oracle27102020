@@ -24,3 +24,16 @@
 
 [docker desktop] ('https://hub.docker.com/editions/community/docker-ce-desktop-windows/')
 
+
+## Docker Community Edition installation on Centos / OL 
+
+```
+sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+====
+
+sudo yum install docker-ce docker-ce-cli containerd.io
+
+```
+
