@@ -276,3 +276,134 @@ REDHAT_SUPPORT_PRODUCT_VERSION="7"
    59  docker  ps  -a
 
 ```
+
+# Image building with Dockerfile 
+
+```
+centos@ip-172-31-71-212 mycode]$ pwd
+/home/centos/mycode
+
+[centos@ip-172-31-71-212 mycode]$ ls
+Dockerfile  ashu.py
+
+[centos@ip-172-31-71-212 mycode]$ docker  build  -t  python:ashuv001  .
+Sending build context to Docker daemon  3.584kB
+Step 1/7 : FROM  python
+ ---> 5336a27a9b1f
+Step 2/7 : MAINTAINER   ashutoshh@linux.com
+ ---> Using cache
+ ---> f05341251e45
+Step 3/7 : RUN  mkdir  /myscript
+ ---> Running in f99ce4c757ee
+Removing intermediate container f99ce4c757ee
+ ---> a9a1660a8026
+Step 4/7 : COPY  ashu.py   /myscript/ashu.py
+ ---> d8d81eaaf393
+Step 5/7 : WORKDIR  /myscript
+ ---> Running in e36afe7b8166
+Removing intermediate container e36afe7b8166
+ ---> b8eada3688ee
+Step 6/7 : RUN chmod +x  ashu.py
+ ---> Running in 34efd80f8b59
+Removing intermediate container 34efd80f8b59
+ ---> ee8c9c72c10e
+Step 7/7 : CMD  ["python","ashu.py"]
+ ---> Running in b0c684d067a0
+Removing intermediate container b0c684d067a0
+ ---> 3a743e9f3187
+Successfully built 3a743e9f3187
+Successfully tagged python:ashuv001
+
+```
+
+## When dockerfile name is different 
+
+```
+docker  build  -t  python:ashuv002  -f  dockerfile.python   . 
+
+```
+
+## docker image internal storage location 
+
+<img src="di.png">
+
+## Resource monitoring 
+
+```
+  135  docker  stats  ashuc1  
+```
+
+## Enable your Docker daemon 
+
+```
+[centos@ip-172-31-71-212 ~]$ sudo systemctl  status  docker  
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; disabled; vendor preset: disabled)
+   Active: inactive (dead)
+     Docs: https://docs.docker.com
+[centos@ip-172-31-71-212 ~]$ 
+[centos@ip-172-31-71-212 ~]$ 
+[centos@ip-172-31-71-212 ~]$ sudo  systemctl  is-enabled  docker  
+disabled
+[centos@ip-172-31-71-212 ~]$ sudo  systemctl  enable  docker  
+Created symlink from /etc/systemd/system/multi-user.target.wants/docker.service to /usr/lib/systemd/system/docker.service.
+[centos@ip-172-31-71-212 ~]$ sudo  systemctl  is-enabled  docker  
+enabled
+
+```
+
+## Restart policy in Containers
+
+[restart policy] ('https://docs.docker.com/config/containers/start-containers-automatically/')
+
+
+##  implementing restart policy in a new container 
+
+```
+docker  run -itd --name ashuc4 --restart  always  python:ashuv001
+```
+
+## change restart policy of an existing container 
+
+```
+docker  update   ashuc1 --restart always  
+ashuc1
+```
+
+## Save Docker image as tar 
+
+```
+ docker  save  -o  ashupyapp.tar   python:ashuv001  
+```
+
+## load from tar 
+
+```
+docker  load  -i  ashupyapp.tar 
+
+```
+
+## Docker image registry concept 
+
+<img src="imgreg.png">
+
+## registry options 
+
+<img src="regop.png">
+
+## Pushing image on Docker hub 
+
+```
+376  docker  build  -t  nginx:ashuv001  . 
+  377  cd
+  378  docker  images
+  379  history 
+  380  docker  images
+  381  docker  login 
+  382  docker  tag   nginx:ashuv001    dockerashu/nginx:ashuv001
+  383  docker  images
+  384  docker  push   dockerashu/nginx:ashuv001
+  385  history 
+  386  docker  logout
+
+```
