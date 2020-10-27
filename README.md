@@ -266,3 +266,13 @@ REDHAT_SUPPORT_PRODUCT_VERSION="7"
 
 ```
 
+## all containers kill & Remove 
+
+```
+  53  docker  ps -q
+   54  docker kill   $(docker  ps -q)
+   
+   58  docker rm  $(docker  ps -qa)
+   59  docker  ps  -a
+
+```
