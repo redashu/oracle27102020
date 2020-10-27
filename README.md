@@ -7,3 +7,20 @@
 ## VM vs containers
 
 <img src="vms.png">
+
+## Container run time Engines 
+
+<img src="cre.png">
+
+## Docker installation history 
+
+<img src="dinstall.png">
+
+## Docker desktop link for Mac OS 
+
+[docker desktop] ('https://hub.docker.com/editions/community/docker-ce-desktop-mac')
+
+## Docker Desktop for Windows 10 
+
+[docker desktop] ('https://hub.docker.com/editions/community/docker-ce-desktop-windows/')
+
