@@ -198,3 +198,32 @@ ENTRYPOINT  systemctl start  httpd
   ```
   
   
+## creating container to access app from outside
+
+```
+docker run -d --name helloashu1 -p  2121:80 oraclehttp:ashuv001 
+```
+
+## Dockerfile with ARg and ENV
+
+```
+[centos@ip-172-31-71-212 apache-httpd]$ cat  Dockerfile 
+FROM  centos 
+MAINTAINER  ashutoshh@linux.com
+ARG  soft=httpd
+ENV  var1=$soft
+# arg based variable value can be changed during image build time 
+# but you don't have to change original dockerfile
+#  this soft var will not be present in container 
+RUN yum  install  $soft git -y
+WORKDIR  /tmp
+RUN  git clone  https://github.com/mdn/beginner-html-site-styled
+RUN  mv  beginner-html-site-styled/*    /var/www/html/
+RUN  rm  -rf  beginner-html-site-styled
+EXPOSE 80
+# by default when container will be launched it will assume 80 port for that container 
+#  EXpose is optional during container creation you can mention it 
+ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
+
+```
+
