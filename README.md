@@ -326,3 +326,27 @@ NETWORK ID          NAME                DRIVER              SCOPE
 c194b17a689b        none                null                local
 
 ```
+
+## static ip to a container 
+
+```
+docker  run  -it --name ashuxc1 --ip 192.168.1.100  --network ashubr1  alpine  sh
+```
+
+```
+  660  docker  network  create  ashubr1  --subnet  192.168.1.0/24 
+  661  docker  network  ls
+  662  docker  network  inspect  ashubr1
+  663  docker ps
+  664  docker  run  -it --rm  --network ashubr1  alpine  sh 
+  665  docker  run  -it --name ashuxc1 --ip 192.168.1.100  --network ashubr1  alpine  sh 
+  666  docker start  ashuxc1 
+  667  docker  run  -it --name ashuxc2 --ip 192.168.1.101  --network ashubr1  alpine  sh 
+  668  docker  run  -it --name ashuxxc2  --ip 192.168.1.101  --network ashubr1  alpine  sh 
+  669  docker  start  ashuxxc2
+  670  docker  ps
+  671  history 
+  672  docker  exec  -it ashuxxc2  sh
+  673  docker  run  -it --name ashuxxc444 --hostname myc.com   --ip 192.168.1.103  --network ashubr1  alpine  sh 
+  ```
+  
