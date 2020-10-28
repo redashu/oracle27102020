@@ -381,3 +381,67 @@ xecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock 
   
  ```
   
+# Container Volumes 
+
+```
+[centos@ip-172-31-71-212 ~]$ docker  volume  create  ashuvol1 
+ashuvol1
+[centos@ip-172-31-71-212 ~]$ docker  volume  ls
+DRIVER              VOLUME NAME
+local               ashuvol1
+
+```
+
+## Read write volume with container 
+
+```
+[centos@ip-172-31-71-212 ~]$ docker  run -it  --name ashux1c1  -v  ashuvol1:/mnt/data:rw   alpine  sh 
+/ # 
+/ # cd  /mnt/data/
+/mnt/data # ls
+/mnt/data # mkdir  hello ashu 
+/mnt/data # touch a.txt
+/mnt/data # ls
+a.txt  ashu   hello
+/mnt/data # exit
+[centos@ip-172-31-71-212 ~]$ docker  rm  ashux1c1 
+ashux1c1
+[centos@ip-172-31-71-212 ~]$ docker  run -it  --name ashux1c1  -v  ashuvol1:/mnt/data:rw   alpine  sh 
+/ # cd  /mnt/data/
+/mnt/data # ls
+a.txt  ashu   hello
+
+```
+
+## Few more commands for volumes 
+
+```
+ 707  docker  volume  create  ashuvol1 
+  708  docker  volume  ls
+  709  docker  run -it  --name x1c1  -v  ashuvol1:/mnt/data:rw   alpine  sh 
+  710  docker  run -it  --name ashux1c1  -v  ashuvol1:/mnt/data:rw   alpine  sh 
+  711  docker  rm  ashux1c1 
+  712  docker  run -it  --name ashux1c1  -v  ashuvol1:/mnt/data:rw   alpine  sh 
+  713  docker  run -it  --name ashux2c2  -v  ashuvol1:/mnt/data:ro   java  bash 
+  714  docker  run -it  --name ashux2c2222  -v  ashuvol1:/mnt/data:ro   java  bash 
+  715  history 
+  716  docker  run -it  --name ashux2c5455 -v  ashuvol1:/google:rw   centos  bash 
+  
+  ```
+  
+  ## Docker volume 
+  
+  ```
+  docker run -d  --name ashuw1c11 -v  /home/centos/project-html-website/:/usr/share/nginx/html -p 9090:80   nginx
+  
+  ```
+  
+  # Docker webui 
+  
+```
+docker run -d --name webui --restart always -p 1155:9000 -v  /var/run/docker.sock:/var/run/docker.sock    portainer/portainer 
+
+```
+
+
+  
