@@ -147,3 +147,54 @@ docker logs  ashujc111
 
 ```
 
+## Dockerfile with Entrypoint parent process
+
+```
+[centos@ip-172-31-71-212 myjavacode]$ cat Dockerfile 
+FROM java
+MAINTAINER  ashutoshh
+RUN  mkdir  /codes
+COPY  hello.java  /codes/hello.java
+WORKDIR  /codes
+RUN  javac  hello.java
+#CMD  ["java","myclass"]
+ENTRYPOINT  ["java","myclass"]
+# cmd based parent process can be over write during container build time
+#  as  the last argument of  container creation from docker image 
+[centos@ip-172-31-71-212 myjavacode]$ docker build  -t  java:ashuappnewv111 . 
+
+```
+
+## Some info about web server
+
+<img src="web.png">
+
+
+## Dockerfile WIth ARg 
+
+```
+FROM  centos 
+MAINTAINER  ashutoshh@linux.com
+ARG  soft=httpd
+RUN yum  install  $soft git -y
+WORKDIR  /tmp
+RUN  git clone  https://github.com/mdn/beginner-html-site-styled
+RUN  mv  beginner-html-site-styled/*    /var/www/html/
+RUN  rm  -rf  beginner-html-site-styled
+EXPOSE 80
+# by default when container will be launched it will assume 80 port for that container 
+#  EXpose is optional during container creation you can mention it 
+ENTRYPOINT  systemctl start  httpd 
+
+```
+
+## Building commands
+
+```
+ 527  docker  build  -t   oraclehttpd:ashuv00111  .
+  528  history 
+  529  cat  Dockerfile 
+  530  docker  build   --build-arg soft=telnet  -t   oraclehttpd:ashuv00111  .
+  ```
+  
+  
