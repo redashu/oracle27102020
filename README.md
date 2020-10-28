@@ -227,3 +227,102 @@ ENTRYPOINT /usr/sbin/httpd -DFOREGROUND
 
 ```
 
+# Docker Network 
+
+<img src="dnet.png">
+
+## check no of bridges by Docker engine 
+
+<img src="dockerbr.png">
+
+## few more commands 
+
+```
+[centos@ip-172-31-71-212 ~]$ docker  network  ls
+NETWORK ID          NAME                DRIVER              SCOPE
+9268cc2404c1        bridge              bridge              local
+9152d3a0ea6b        host                host                local
+c194b17a689b        none                null                local
+
+```
+
+====
+
+```
+  642  docker  network  inspect  9268cc2404c1  
+  643  history 
+[centos@ip-172-31-71-212 ~]$ docker  network  inspect  9268cc2404c1   |   grep -i ip
+        "EnableIPv6": false,
+        "IPAM": {
+                "IPv4Address": "172.17.0.5/16",
+                "IPv6Address": ""
+                "IPv4Address": "172.17.0.4/16",
+                "IPv6Address": ""
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+                "IPv4Address": "172.17.0.9/16",
+                "IPv6Address": ""
+                "IPv4Address": "172.17.0.7/16",
+                
+```
+
+## Container with None Bridge
+
+```
+[centos@ip-172-31-71-212 ~]$ docker run  -it  --rm  --network  none  alpine  sh 
+/ # ifconfig 
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          UP LOOPBACK RUNNING  MTU:65536  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+
+/ # ping 172.17.0.1
+PING 172.17.0.1 (172.17.0.1): 56 data bytes
+ping: sendto: Network unreachable
+
+```
+
+## Docker Host Bridge
+
+<img src="dhost.png">
+
+```
+[centos@ip-172-31-71-212 ~]$ docker run  -it --rm  --network host alpine  sh 
+/ # ifconfig 
+docker0   Link encap:Ethernet  HWaddr 02:42:F4:1F:BD:7D  
+          inet addr:172.17.0.1  Bcast:172.17.255.255  Mask:255.255.0.0
+          inet6 addr: fe80::42:f4ff:fe1f:bd7d/64 Scope:Link
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:159752 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:212630 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:12494086 (11.9 MiB)  TX bytes:1053380062 (1004.5 MiB)
+
+eth0      Link encap:Ethernet  HWaddr 16:88:8D:25:16:C9  
+          inet addr:172.31.71.212  Bcast:172.31.79.255  Mask:255.255.240.0
+          inet6 addr: fe80::1488:8dff:fe25:16c9/64 Scope:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:9001  Metric:1
+          RX packets:1438360 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:334315 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:1844140673 (1.7 GiB)  TX bytes:72555989 (69.1 MiB)
+
+
+```
+
+## Custom Bridge
+
+```
+[centos@ip-172-31-71-212 ~]$ docker  network  create  ashubr1  --subnet  192.168.1.0/24 
+979238f7c6e4ad199555c7c1bdfc83ae5e0c1cb513a397654c5fce12c8ab0ea4
+[centos@ip-172-31-71-212 ~]$ docker  network  ls
+NETWORK ID          NAME                DRIVER              SCOPE
+979238f7c6e4        ashubr1             bridge              local
+9268cc2404c1        bridge              bridge              local
+9152d3a0ea6b        host                host                local
+c194b17a689b        none                null                local
+
+```
