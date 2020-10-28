@@ -54,3 +54,96 @@ sharmelakaulwar/nginx        sharmela003         5b024fd8b7f7        17 hours ag
 gk303007/webapps             v1                  9dd8a2759747        17 hours ago        133MB
 webapps                      v1                  9dd
 ```
+
+## Visual of Docker client 
+
+<img src="dcli.png">
+
+## Resource limit using cgroups in docker / container 
+
+```
+docker run -d  --name ashuc1restrict  --memory 100M     alpine ping fb.com 
+```
+
+## updating resource in an existing container 
+
+```
+docker update  ashuc1  --memory 50M 
+```
+
+## updating cpu info 
+
+```
+docker  run -d --name ashuxc2  --cpus=1  alpine ping fb.com docker  run -d --name ashuxc3  --cpuset-cpus=0  --cpu-shares=20  alpine ping fb.com
+```
+
+# Dockerfile More Examples 
+
+## code
+
+```
+[centos@ip-172-31-71-212 myjavacode]$ cat  hello.java 
+class myclass { 
+    public static void main(String args[]) 
+    { 
+        // test expression 
+               while (true) { 
+                            System.out.println("Hello World"); 
+        //                       
+        //                                   // update expression 
+                             } 
+            } 
+          } 
+
+```
+
+## Dockerfile
+
+```
+[centos@ip-172-31-71-212 myjavacode]$ cat  Dockerfile 
+FROM java
+MAINTAINER  ashutoshh
+RUN  mkdir  /codes
+COPY  hello.java  /codes/hello.java
+WORKDIR  /codes
+RUN  javac  hello.java
+CMD  ["java","myclass"]
+
+```
+
+## Now build java image
+
+```
+[centos@ip-172-31-71-212 myjavacode]$ docker  build -t  java:ashuappv1 .  
+Sending build context to Docker daemon  3.072kB
+Step 1/7 : FROM java
+ ---> d23bdf5b1b1b
+Step 2/7 : MAINTAINER  ashutoshh
+ ---> Running in 14a22004db2f
+Removing intermediate container 14a22004db2f
+ ---> ecd2f7064295
+Step 3/7 : RUN  mkdir  /codes
+ ---> Running in 93159b4b8756
+Removing intermediate container 93159b4b8756
+ ---> 29607a2b2f42
+Step 4/7 : COPY  hello.java  /codes/hello.java
+ ---> 43249a2c6790
+Step 5/7 : WORKDIR  /codes
+ ---> Running in 5a96fbe4a9
+ ```
+ 
+ 
+ ## Now creating container from Docker image 
+ 
+ ```
+  docker  run -itd --name ashujc111  java:ashuappv1  
+  
+```
+
+## checking logs 
+
+```
+docker logs  ashujc111 
+
+```
+
