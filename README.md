@@ -350,3 +350,34 @@ docker  run  -it --name ashuxc1 --ip 192.168.1.100  --network ashubr1  alpine  s
   673  docker  run  -it --name ashuxxc444 --hostname myc.com   --ip 192.168.1.103  --network ashubr1  alpine  sh 
   ```
   
+## Docker networking Drivers
+
+<img src="driver.png">
+
+
+## COnnect your Storage team to attach and configure Storage on Docker host 
+
+```
+311  mkfs.xfs  /dev/xvdf 
+  312  mkdir  /oracletraining 
+  313  mount  /dev/xvdf   /oracletraining/
+  
+```
+
+## When you have Storage -- configure with Docker engine 
+
+```
+694  sudo vim  /usr/lib/systemd/system/docker.service 
+
+xecStart=/usr/bin/dockerd -H fd:// --containerd=/run/containerd/containerd.sock -H tcp://0.0.0.0:2375 -g /oracletraining
+
+```
+
+## restart Docker engine 
+
+```
+  695  sudo systemctl daemon-reload 
+  696  sudo systemctl restart docker
+  
+ ```
+  
