@@ -223,3 +223,69 @@ spec:
   764  kubectl  get  pods    -o wide
 
 ```
+
+## YAML /JSON file auto generate 
+
+```
+  776  kubectl  run  ashupod11  --image=nginx  --port 80  --dry-run -o yaml 
+  777  kubectl  run  ashupod11  --image=nginx  --port 80  --dry-run -o json  
+  778  history
+  779  kubectl  run  ashupod11  --image=nginx  --port 80  --dry-run -o yaml >ashupod2.yml
+  780  kubectl  run  ashupod11  --image=nginx  --port 80  --dry-run -o json  >abc.json 
+  
+  ```
+  
+  ## Some more 
+  
+  ```
+  787  kubectl  delete po ashupod11
+  788  kubectl delete pods --all
+  789  ls
+  790  cat  abc.json
+  791  kubectl  apply -f abc.json
+  792  kubectl get  po 
+  793  kubectl  describe po   ashupod11
+  
+  ```
+  
+  ## Access pod from Client system 
+  
+  ```
+   811  kubectl  exec  -it  ashupod11  bash 
+  812  kubectl  exec  -it  ashupod11  -- bash 
+  ```
+  
+  ## Manage parent process in POd
+  
+  <img src="pp.png">
+  
+  ## Example of command 
+  
+  ```
+  ❯ cat  alp.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashualppod001
+  name: ashualppod001
+spec:
+  containers:
+  - image: alpine
+    name: ashualppod001
+    command: ["/bin/sh","-c","ping fb.com"]  # replace of Entrypoint 
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  
+  ```
+  
+  ## deploy and check logs 
+  
+  ```
+   831  kubectl  logs  ashualppod001
+  832  kubectl  logs  -f  ashualppod001
+  
+  ```
+  
