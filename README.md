@@ -179,3 +179,47 @@ ip-172-31-47-137.ec2.internal   Ready    master   7h21m   v1.19.3
 
 <img src="kubeconfig.png">
 
+## CI CD model overview 
+
+<img src="cicd.png">
+
+## Container vs POd
+
+<img src="pod.png">
+
+## one more look 
+
+<img src="poddesign.png">
+
+# PODs
+
+## Example 1
+
+```
+❯ cat  ashu-pod1.yml
+apiVersion: v1
+kind: Pod
+metadata:
+ name: ashupod001   # pod name must be unique 
+spec:
+ containers: # mentioning about container info 
+ - image: nginx 
+   name: ashuc1 #  there is use of this 
+   ports:
+   - containerPort: 80  # that port similar to the one we have defined in Expose of Docker
+   
+```
+
+## pods related commands
+
+```
+ 757  kubectl apply -f ashu-pod1.yml 
+  758  kubectl  get  pods
+  759  kubectl  get  nodes
+  760  cat ashu-pod1.yml
+  761  kubectl  get  nodes
+  762  kubectl  get  pods
+  763  kubectl  get  pods  ashupod001  -o wide
+  764  kubectl  get  pods    -o wide
+
+```
