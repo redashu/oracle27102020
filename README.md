@@ -63,3 +63,48 @@ services:
   
   ```
   
+## Most easier way 
+
+```
+[centos@ip-172-31-71-212 myashuapp1]$ docker-compose up -d
+Creating network "myashuapp1_default" with the default driver
+Creating ashuc11 ... done
+[centos@ip-172-31-71-212 myashuapp1]$ docker-compose down
+Stopping ashuc11 ... done
+Removing ashuc11 ... done
+Removing network myashuapp1_default
+
+```
+
+## Jenkins job for CI CD
+
+<img src="jenkin.png">
+
+## compose file example 2
+
+```
+[centos@ip-172-31-71-212 myashuapp1]$ cat docker-compose.yml 
+version: "3.8"  
+services:
+ testapp:
+  image: alpine
+  container_name: ashuccx33
+  command: ping fb.com
+  restart: always 
+
+ appweb:
+  image: nginx
+  container_name: ashuc11
+  restart: always
+  ports:
+   - "1122:80"
+
+
+
+```
+
+## Docker compose more Examples 
+
+[ashutoshh repo] ('https://github.com/redashu/docker-compose')
+
+
