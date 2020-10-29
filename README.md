@@ -124,3 +124,56 @@ services:
 
 <img src="minion.png">
 
+## k8s installation method
+
+<img src="k8sinstall.png">
+
+## k8s client to k8s cluster connection 
+
+<img src="k8scli.png">
+
+## Installing minikube on Mac OS 
+
+```
+695  curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-darwin-amd64
+ 
+  697  sudo install minikube-darwin-amd64 /usr/local/bin/minikube
+  698  minikube version
+```
+
+## Minikube to install k8s single node cluster 
+
+<img src="minikube.png">
+
+## checking kubectl connectin 
+
+```
+❯ kubectl version
+Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:50:19Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.2", GitCommit:"f5743093fd1c663cb0cbc89748f730662345d44d", GitTreeState:"clean", BuildDate:"2020-09-16T13:32:58Z", GoVersion:"go1.15", Compiler:"gc", Platform:"linux/amd64"}
+❯ 
+❯ 
+❯ kubectl  get  nodes
+NAME       STATUS   ROLES    AGE   VERSION
+minikube   Ready    master   28m   v1.19.2
+
+
+```
+
+## Remove cluster 
+
+```
+❯ kubectl  version  --kubeconfig  admin.conf
+Client Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:50:19Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"darwin/amd64"}
+Server Version: version.Info{Major:"1", Minor:"19", GitVersion:"v1.19.3", GitCommit:"1e11e4a2108024935ecfcb2912226cedeafd99df", GitTreeState:"clean", BuildDate:"2020-10-14T12:41:49Z", GoVersion:"go1.15.2", Compiler:"gc", Platform:"linux/amd64"}
+❯ 
+❯ kubectl  get  nodes  --kubeconfig  admin.conf
+NAME                            STATUS   ROLES    AGE     VERSION
+ip-172-31-37-175.ec2.internal   Ready    <none>   7h21m   v1.19.3
+ip-172-31-44-72.ec2.internal    Ready    <none>   7h21m   v1.19.3
+ip-172-31-47-137.ec2.internal   Ready    master   7h21m   v1.19.3
+
+
+
+```
+
