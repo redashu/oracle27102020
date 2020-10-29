@@ -173,7 +173,9 @@ ip-172-31-37-175.ec2.internal   Ready    <none>   7h21m   v1.19.3
 ip-172-31-44-72.ec2.internal    Ready    <none>   7h21m   v1.19.3
 ip-172-31-47-137.ec2.internal   Ready    master   7h21m   v1.19.3
 
-
-
 ```
+
+## admin.conf setup 
+
+<img src="kubeconfig.png">
 
