@@ -119,3 +119,8 @@ services:
 ## Kubernetes architecture
 
 <img src="k8sarch.png">
+
+## kubernetes minion nodes
+
+<img src="minion.png">
+
