@@ -108,3 +108,14 @@ services:
 [ashutoshh repo] ('https://github.com/redashu/docker-compose')
 
 
+## COntainer management problems
+
+<img src="cp.png">
+
+## container orchestration solutions 
+
+<img src="co.png">
+
+## Kubernetes architecture
+
+<img src="k8sarch.png">
