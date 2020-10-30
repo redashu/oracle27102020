@@ -481,3 +481,32 @@ namespace:  10 bytes
  [dashboard] ('https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/')
  
  
+## some more useful commands
+
+```
+ 1133  aws configure
+ 1134  cat ~/.kube/config
+ 1135  kubectl config view
+ 1136  aws eks describe-cluster --name myoraclecluster
+ 1137  history
+ 1138  aws eks update-kubeconfig --name myoraclecluster
+ 1139  kubectl config view
+ 1140  cat ~/.kube/config
+ 1141  kubectl config get-contexts
+ 1142  kubectl get  nodes
+ 1143  kubectl config use-contexts   kubernetes-admin@kubernetes
+ 1144  kubectl config use-context   kubernetes-admin@kubernetes
+ 1145  kubectl get  nodes
+ 1146  history
+ 1147  kubectl get  nodes
+ 1148  kubectl config get-contexts
+ 1149  kubectl config use-context   arn:aws:eks:us-east-1:061112302981:cluster/myoraclecluster 
+ 1150  kubectl get  nodes
+ 1151  kubectl apply -f ashu-pod1.yml 
+ 1152  kubectl run pod11 --image=nginx --port 80
+ 1153  kubectl get po 
+ 1154  kubectl get po -o wide
+ 1155  kubectl get no
+ 1156  kubectl get ns
+
+```
