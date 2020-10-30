@@ -214,4 +214,144 @@ ashudep1-6866c5cf89-5fnbr       1/1     Running   0          25s
 ashutoshdep1-5c7659b5bc-nwj8c   1/1     Running   0          9s
 ```
 
+## namespace
 
+```
+❯ kubectl get  namespace
+NAME              STATUS   AGE
+default           Active   30h
+kube-node-lease   Active   30h
+kube-public       Active   30h
+kube-system       Active   30h
+rati              Active   22h
+❯ kubectl  create  namespace  ashu-space
+namespace/ashu-space created
+❯ kubectl get  namespace
+NAME              STATUS   AGE
+ashu-space        Active   4s
+default           Active   30h
+kube-node-lease   Active   30h
+kube-public       Active   30h
+kube-system       Active   30h
+rati              Active   22h
+
+```
+
+
+## check version upgrade
+
+```
+ kubectl  create deployment  ashuapp123 --image=dockerashu/oraclewebapp:v0001  --dry-run=client -o yaml >appde.yml
+ 
+ ===
+ ❯ cat  appde.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: ashu-space
+  creationTimestamp: null
+  labels:
+    app: ashuapp123
+  name: ashuapp123
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ashuapp123
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ashuapp123
+    spec:
+      containers:
+      - image: dockerashu/oraclewebapp:v0001
+        name: oraclewebapp
+        resources: {}
+        
+  ```
+  
+  ## depoy
+  
+  ```
+   1040  kubectl  expose deployment  ashuapp123  --type NodePort --port 9090 --target-port 80  --name  mysvc1  -n ashu-space 
+ 1041  kubectl  get  svc  -n ashu-space
+ 1042  kubectl  get  po  -n ashu-space
+ 1043  kubectl  get  deployment  -n ashu-space 
+ 1044  kubectl  get  rs   -n ashu-space 
+ 1045  kubectl  get  po  -n ashu-space 
+❯ kubectl  get svc   -n ashu-space
+NAME     TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
+mysvc1   NodePort   10.106.229.57   <none>        9090:30881/TCP   4m3s
+
+```
+
+## scaling 
+
+```
+❯ kubectl  get  deploy -n ashu-space
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+ashuapp123   1/1     1            1           10m
+❯ 
+❯ kubectl scale deployment  ashuapp123 --replicas=5 -n ashu-space
+deployment.apps/ashuapp123 scaled
+❯ 
+❯ kubectl  get  deploy -n ashu-space
+NAME         READY   UP-TO-DATE   AVAILABLE   AGE
+ashuapp123   5/5     5            5           11m
+
+```
+## Describe k8s deployment 
+
+```
+❯ kubectl describe deploy ashuapp123  -n ashu-space
+Name:                   ashuapp123
+Namespace:              ashu-space
+CreationTimestamp:      Fri, 30 Oct 2020 14:59:19 +0530
+Labels:                 app=ashuapp123
+Annotations:            deployment.kubernetes.io/revision: 1
+Selector:               app=ashuapp123
+Replicas:               5 desired | 5 updated | 5 total | 5 available | 0 unavailable
+StrategyType:           RollingUpdate
+MinReadySeconds:        0
+RollingUpdateStrategy:  25% max unavailable, 25% max surge
+Pod Template:
+  Labels:  app=ashuapp123
+  Containers:
+   oraclewebapp:
+    Image:        dockerashu/oraclewebapp:v0001
+    Port:         <none>
+    Host Port:    <none>
+    Environment:  <none>
+    Mounts:       <none>
+  Volumes:        <none>
+Conditions:
+
+```
+
+## check version history 
+
+```
+❯ kubectl rollout history deploy  ashuapp123  -n ashu-space
+deployment.apps/ashuapp123 
+REVISION  CHANGE-CAUSE
+1         <none>
+2         <none>
+3         <none>
+
+
+░▒▓ ~/Desktop/mypods ··
+
+```
+
+ ## rollback to prevsion 
+ 
+ ```
+ 1073  kubectl rollout history deploy  ashuapp123  -n ashu-space 
+ 1074  kubectl rollout undo  deploy  ashuapp123  --to-revision=1   -n ashu-space 
+ 1075  kubectl rollout status deploy  ashuapp123  -n ashu-space
+ 
+ ```
+ 
+ 
