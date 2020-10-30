@@ -458,3 +458,26 @@ ca.crt:     1066 bytes
 namespace:  10 bytes
 ```
 
+# Deploy dashboard 
+
+```
+1110  kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.0/aio/deploy/recommended.yaml
+ 1111  kubectl get  ns
+ 1112  kubectl get po -n kubernetes-dashbarod
+ 1113  kubectl get po -n kubernetes-dashboard 
+ 1114  kubectl get sa  -n kubernetes-dashboard 
+ 1115  kubectl get secret  -n kubernetes-dashboard 
+ 1116  kubectl describe secret kubernetes-dashboard-token-hbv5x   -n kubernetes-dashboard 
+ 1117  history
+ 1118  kubectl get po -n kubernetes-dashboard 
+ 1119  kubectl get svc  -n kubernetes-dashboard 
+ 1120  kubectl edit  svc  kubernetes-dashboard   -n kubernetes-dashboard 
+ 1121  kubectl get svc  -n kubernetes-dashboard 
+ 
+ ```
+ 
+ ## dashboard link
+ 
+ [dashboard] ('https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/')
+ 
+ 
