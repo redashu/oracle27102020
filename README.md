@@ -426,3 +426,35 @@ spec:
   ```
   
   
+# Dashbaord 
+
+<img src="sacc.png">
+
+## 
+
+```
+❯ kubectl get  serviceaccount  -n  ashu-space
+NAME      SECRETS   AGE
+default   1         133m
+❯ kubectl get  sa  -n  ashu-space
+NAME      SECRETS   AGE
+default   1         133m
+❯ kubectl get  secret   -n  ashu-space
+NAME                  TYPE                                  DATA   AGE
+default-token-pqtdx   kubernetes.io/service-account-token   3      134m
+❯ kubectl describe   secret  default-token-pqtdx  -n  ashu-space
+Name:         default-token-pqtdx
+Namespace:    ashu-space
+Labels:       <none>
+Annotations:  kubernetes.io/service-account.name: default
+              kubernetes.io/service-account.uid: 9700cfd1-a646-4e02-9ed9-de56700faff1
+
+Type:  kubernetes.io/service-account-token
+
+Data
+====
+token:      eyJhbGciOiJSUzI1NiIsImtpZCI6Ind2Vk0xbERqanhOOFpxU0RGMlFXSi1rb2RoT1VNLVdIRjUtNEcxOXZLTXcifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJhc2h1LXNwYWNlIiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImRlZmF1bHQtdG9rZW4tcHF0ZHgiLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiZGVmYXVsdCIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6Ijk3MDBjZmQxLWE2NDYtNGUwMi05ZWQ5LWRlNTY3MDBmYWZmMSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDphc2h1LXNwYWNlOmRlZmF1bHQifQ.Vjv-jVkKjWc9ZnaoCPR-IbueTerUpgcnjbtWbCkdkjwS509kp5koNZ2PB_64sDiI8wNyZ8RUN15MJbaOwIdaZf4ALTCF-KoHCSoAKQ7MuOJZfcsOEikArFgisZh5oQ_jkGN9XAUfrd4-heyOswcieYTGpzxjmhfoWT68eMl3LrxFUhJYv-2KXXW5-9b23tdwT1hGAWcISFmwaeILu8WEOIirdhNwYFTc1fkKMAgKxkbXKOe-eyJBYeTCZfgiarj7rImP0VE8a4-NDVhsoVS5jkkRMRN45sJ7lJw-LbrQwvvYpdYuveck57YCCpnr5QFF04A9DjRwSQIvEepAvTBTSg
+ca.crt:     1066 bytes
+namespace:  10 bytes
+```
+
