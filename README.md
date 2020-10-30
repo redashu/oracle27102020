@@ -389,3 +389,40 @@ spec:
   
   ```
   
+## Emp with HostPath
+
+```
+❯ cat  alp.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashualppod001
+  name: ashualppod001
+spec:
+  volumes:   #  for volume creation purpose 
+  - name: ashuvol001 
+    emptyDir: {}   #  will take some random location from selected minion Node 
+
+  - name: ashuvol002
+    hostPath:  # it will take directory / file from minion node
+     path: /etc
+     type: Directory 
+     
+  containers:
+  - image: alpine
+    name: ashualppod001
+    volumeMounts:
+    - name: ashuvol001
+      mountPath: /mnt/oracledata 
+    - name: ashuvol002
+      mountPath: /myhostetc  # mount point in the POD/container 
+    command: ["/bin/sh","-c","ping fb.com -i 2 >>/mnt/oracledata/data.txt"]  # replace of Entrypoint 
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  
+  ```
+  
+  
