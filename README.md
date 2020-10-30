@@ -139,4 +139,30 @@ spec:
   
  ```
  
+# RC 
+
+```
+❯ cat ashuapp-rc.yml
+apiVersion: v1
+kind: ReplicationController
+metadata:
+ name: ashu-rc-1
+ labels:
+  x: ashurc
+
+spec:
+ replicas: 2  # number of PODS 
+ template:  # rc will use template to create pods 
+  metadata:
+   labels:  # label of pod 
+    app: ashuapprc
+  spec:
+   containers:
+   - image: dockerashu/httpd:ashuappv2
+     name: ashuc1
+     ports:
+     - containerPort: 80
+     
+ ```
+ 
  
