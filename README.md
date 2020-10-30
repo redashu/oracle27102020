@@ -359,3 +359,33 @@ REVISION  CHANGE-CAUSE
  <img src="eupod.png">
  
  
+# storage 
+
+<img src="st.png">
+
+## EmptyDir 
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: ashualppod001
+  name: ashualppod001
+spec:
+  volumes:   #  for volume creation purpose 
+  - name: ashuvol001 
+    emptyDir: {}   #  will take some random location from selected minion Node 
+  containers:
+  - image: alpine
+    name: ashualppod001
+    volumeMounts:
+    - name: ashuvol001
+      mountPath: /mnt/oracledata 
+    command: ["/bin/sh","-c","ping fb.com -i 2 >>/mnt/oracledata/data.txt"]  # replace of Entrypoint
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  
+  ```
+  
