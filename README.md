@@ -165,4 +165,53 @@ spec:
      
  ```
  
+ ##  Scale 
  
+ ```
+ 985  kubectl  scale  rc  ashu-rc-1  --replicas=1  
+  986  kubectl get  rc
+  987  kubectl  scale  rc  ashu-rc-1  --replicas=10  
+  988  kubectl get  rc
+❯ kubectl  scale  rc  ashu-rc-1  --replicas=2
+replicationcontroller/ashu-rc-1 scaled
+
+```
+
+## Deployment in k8s
+
+<img src="dep.png">
+
+## creating deployment 
+
+```
+kubectl  create deployment  ashudep1 --image=nginx  --dry-run=client -o yaml  >ashudep.yml
+```
+
+## Deployment commands 
+
+```
+❯ kubectl  apply -f  ashudep.yml
+deployment.apps/ashudep1 created
+❯ 
+❯ kubectl get  rs
+NAME                  DESIRED   CURRENT   READY   AGE
+ashudep1-6866c5cf89   1         1         1       6s
+❯ kubectl get  po
+NAME                        READY   STATUS    RESTARTS   AGE
+ashudep1-6866c5cf89-5fnbr   1/1     Running   0          9s
+❯ 
+❯ kubectl get  deploy
+NAME           READY   UP-TO-DATE   AVAILABLE   AGE
+ashudep1       1/1     1            1           18s
+ashutoshdep1   1/1     1            1           2s
+❯ kubectl get  rs
+NAME                      DESIRED   CURRENT   READY   AGE
+ashudep1-6866c5cf89       1         1         1       22s
+ashutoshdep1-5c7659b5bc   1         1         1       6s
+❯ kubectl get  po
+NAME                            READY   STATUS    RESTARTS   AGE
+ashudep1-6866c5cf89-5fnbr       1/1     Running   0          25s
+ashutoshdep1-5c7659b5bc-nwj8c   1/1     Running   0          9s
+```
+
+
